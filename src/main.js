@@ -8,8 +8,10 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
 const loader = document.querySelector('.loader');
+const addImagesBtn = document.querySelector('.btn');
 
 loader.classList.add('hide');
+addImagesBtn.classList.add('hide');
 
 form.addEventListener('submit', e => {
   e.preventDefault();

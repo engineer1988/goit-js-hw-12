@@ -2,6 +2,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
+const addImagesBtn = document.querySelector('.btn');
 
 export default function renderImages(images) {
   if (images.hits.length === 0) {
@@ -46,4 +47,5 @@ export default function renderImages(images) {
   gallery.innerHTML = '';
   gallery.innerHTML = markup;
   loader.classList.add('hide');
+  addImagesBtn.classList.remove('hide');
 }
