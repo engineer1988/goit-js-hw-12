@@ -1,11 +1,9 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-const gallery = document.querySelector('.gallery');
-const loader = document.querySelector('.loader');
-const addImagesBtn = document.querySelector('.btn');
-
+export let number;
 export default function renderImages(images) {
   if (images.hits.length === 0) {
+    number = images.hits.length;
     iziToast.error({
       maxWidth: '432px',
       messageColor: 'rgb(250, 250, 251)',
@@ -44,8 +42,5 @@ export default function renderImages(images) {
           </li>`;
     })
     .join('');
-  gallery.innerHTML = '';
-  gallery.innerHTML = markup;
-  loader.classList.add('hide');
-  addImagesBtn.classList.remove('hide');
+  return markup;
 }
