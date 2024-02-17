@@ -2,8 +2,8 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 export let number;
 export default function renderImages(images) {
-  if (images.hits.length === 0) {
-    number = images.hits.length;
+  number = images.hits.length;
+  if (number === 0) {
     iziToast.error({
       maxWidth: '432px',
       messageColor: 'rgb(250, 250, 251)',

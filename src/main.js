@@ -24,9 +24,9 @@ const lightbox = new SimpleLightbox('.gallery a', options);
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  search = e.target.elements.search.value.trim();
-  showLoader();
   page = 1;
+  search = e.target.elements.search.value.trim();
+
   fetchImages(search, page, perPage)
     .then(images => renderImages(images))
     .then(markup => viewLightBox(markup))
@@ -72,10 +72,16 @@ function viewLightBox(markup) {
   } else {
     gallery.insertAdjacentHTML('beforeend', markup);
   }
-  checkouBtn();
-  lightbox.refresh();
   hideLoader();
+
+  if (number === 0) {
+    hideBtn();
+  } else {
+    showBtn();
+  }
+  // checkoutBtn();
   totalHitsBtn();
+  lightbox.refresh();
 }
 
 function showLoader() {
@@ -94,19 +100,19 @@ function hideBtn() {
   addImagesBtn.classList.add('hidden');
 }
 
-function checkouBtn() {
-  if (number === 0) {
-    hideBtn();
-  } else {
-    showBtn();
-  }
-}
+// function checkoutBtn() {
+//   if (page >= 1 && !(number === 0)) {
+//     showBtn();
+//   } else {
+//     hideBtn();
+//   }
+// }
 
 function totalHitsBtn() {
   totalPages = Math.ceil(totalHits / perPage);
-  if (page >= totalPages) {
+  if (page >= totalPages && !(number === 0)) {
     hideBtn();
-    return iziToast.error({
+    iziToast.error({
       maxWidth: '432px',
       messageColor: 'rgb(250, 250, 251)',
       messageSize: '16px',
