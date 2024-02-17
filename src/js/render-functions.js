@@ -14,6 +14,7 @@ export default function renderImages(images) {
         'Sorry, there are no images matching your search query. Please try again!',
     });
   }
+
   const markup = images.hits
     .map(image => {
       return `
