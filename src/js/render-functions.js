@@ -43,5 +43,6 @@ export default function renderImages(images) {
           </li>`;
     })
     .join('');
+
   return markup;
 }

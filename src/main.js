@@ -9,7 +9,9 @@ import { totalHits } from './js/pixabay-api';
 let page = 1;
 let perPage = 15;
 let totalPages;
+let cardHeight;
 const gallery = document.querySelector('.gallery');
+const galleryItem = document.querySelector('.gallery-item');
 const form = document.querySelector('.form');
 const loader = document.querySelector('.loader');
 const addImagesBtn = document.querySelector('.btn');
@@ -72,16 +74,13 @@ function viewLightBox(markup) {
   } else {
     gallery.insertAdjacentHTML('beforeend', markup);
   }
-  hideLoader();
+  cardHeight = gallery.getBoundingClientRect().height / 2;
 
-  if (number === 0) {
-    hideBtn();
-  } else {
-    showBtn();
-  }
-  // checkoutBtn();
+  hideLoader();
+  checkoutBtn();
   totalHitsBtn();
   lightbox.refresh();
+  scroll();
 }
 
 function showLoader() {
@@ -100,13 +99,13 @@ function hideBtn() {
   addImagesBtn.classList.add('hidden');
 }
 
-// function checkoutBtn() {
-//   if (page >= 1 && !(number === 0)) {
-//     showBtn();
-//   } else {
-//     hideBtn();
-//   }
-// }
+function checkoutBtn() {
+  if (number === 0) {
+    hideBtn();
+  } else {
+    showBtn();
+  }
+}
 
 function totalHitsBtn() {
   totalPages = Math.ceil(totalHits / perPage);
@@ -121,4 +120,11 @@ function totalHitsBtn() {
       message: "We're sorry, but you've reached the end of search results.",
     });
   }
+}
+
+function scroll() {
+  window.scrollBy({
+    top: cardHeight,
+    behavior: 'smooth',
+  });
 }
