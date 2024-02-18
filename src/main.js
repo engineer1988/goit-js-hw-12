@@ -10,8 +10,8 @@ let page = 1;
 let perPage = 15;
 let totalPages;
 let cardHeight;
+let search;
 const gallery = document.querySelector('.gallery');
-const galleryItem = document.querySelector('.gallery-item');
 const form = document.querySelector('.form');
 const loader = document.querySelector('.loader');
 const addImagesBtn = document.querySelector('.btn');
@@ -21,7 +21,6 @@ const options = {
   captionDelay: 250,
 };
 
-let search;
 const lightbox = new SimpleLightbox('.gallery a', options);
 
 form.addEventListener('submit', e => {

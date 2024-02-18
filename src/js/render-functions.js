@@ -1,6 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 export let number;
+
 export default function renderImages(images) {
   number = images.hits.length;
   if (number === 0) {
