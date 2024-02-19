@@ -25,12 +25,16 @@ const lightbox = new SimpleLightbox('.gallery a', options);
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+  showLoader();
   page = 1;
   search = e.target.elements.search.value.trim();
 
   fetchImages(search, page, perPage)
     .then(images => renderImages(images))
-    .then(markup => viewLightBox(markup))
+    .then(markup => {
+      viewLightBox(markup);
+      hideLoader();
+    })
     .catch(error =>
       iziToast.error({
         maxWidth: '432px',
@@ -41,17 +45,17 @@ form.addEventListener('submit', e => {
         message: `${error}`,
       })
     );
-
   form.reset();
 });
 
 addImagesBtn.addEventListener('click', () => {
-  showLoader();
   page += 1;
-
+  hideBtn();
   fetchImages(search, page, perPage)
     .then(images => renderImages(images))
-    .then(markup => viewLightBox(markup))
+    .then(markup => {
+      viewLightBox(markup);
+    })
     .catch(error =>
       iziToast.error({
         maxWidth: '432px',
@@ -62,7 +66,6 @@ addImagesBtn.addEventListener('click', () => {
         message: `${error}`,
       })
     );
-
   form.reset();
 });
 
@@ -75,7 +78,6 @@ function viewLightBox(markup) {
   }
   cardHeight = gallery.getBoundingClientRect().height / 2;
 
-  hideLoader();
   checkoutBtn();
   totalHitsBtn();
   lightbox.refresh();
