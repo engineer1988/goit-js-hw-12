@@ -25,6 +25,8 @@ const lightbox = new SimpleLightbox('.gallery a', options);
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+  gallery.innerHTML = '';
+  hideBtn();
   showLoader();
   page = 1;
   search = e.target.elements.search.value.trim();
@@ -51,10 +53,12 @@ form.addEventListener('submit', e => {
 addImagesBtn.addEventListener('click', () => {
   page += 1;
   hideBtn();
+  showLoader();
   fetchImages(search, page, perPage)
     .then(images => renderImages(images))
     .then(markup => {
       viewLightBox(markup);
+      hideLoader();
     })
     .catch(error =>
       iziToast.error({
@@ -71,7 +75,6 @@ addImagesBtn.addEventListener('click', () => {
 
 function viewLightBox(markup) {
   if (page === 1) {
-    gallery.innerHTML = '';
     gallery.innerHTML = markup;
   } else {
     gallery.insertAdjacentHTML('beforeend', markup);
